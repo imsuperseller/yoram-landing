@@ -2,12 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 
 /**
  * Lead capture endpoint.
- * Stores leads in a simple JSON format and optionally sends WhatsApp notification.
+ * Sends WhatsApp notification to Yoram via Rensto WAHA Pro.
  *
  * Environment variables:
- * - WHATSAPP_TOKEN (optional): WhatsApp Cloud API token
- * - WHATSAPP_PHONE_NUMBER_ID (optional): WhatsApp business phone number ID
- * - NOTIFICATION_PHONE (optional): Phone number to notify (with country code, no +)
+ * - WAHA_API_URL:  WAHA Pro base URL (e.g. http://172.245.56.50:3000)
+ * - WAHA_API_KEY:  WAHA Pro API key
+ * - WAHA_SESSION:  WAHA session name (default: "default")
+ * - NOTIFY_CHAT_ID: Recipient chatId (e.g. 972522422274@c.us)
  */
 export async function POST(req: NextRequest) {
   try {
@@ -32,34 +33,39 @@ export async function POST(req: NextRequest) {
     // Log the lead (visible in Vercel logs)
     console.log("NEW LEAD:", JSON.stringify(lead));
 
-    // Send WhatsApp notification if configured
-    const whatsappToken = process.env.WHATSAPP_TOKEN;
-    const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
-    const notificationPhone = process.env.NOTIFICATION_PHONE;
+    // Send WhatsApp notification via WAHA Pro
+    const wahaUrl = process.env.WAHA_API_URL;
+    const wahaKey = process.env.WAHA_API_KEY;
+    const wahaSession = process.env.WAHA_SESSION || "default";
+    const notifyChatId = process.env.NOTIFY_CHAT_ID;
 
-    if (whatsappToken && phoneNumberId && notificationPhone) {
+    if (wahaUrl && wahaKey && notifyChatId) {
       try {
-        await fetch(
-          `https://graph.facebook.com/v21.0/${phoneNumberId}/messages`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${whatsappToken}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              messaging_product: "whatsapp",
-              to: notificationPhone,
-              type: "text",
-              text: {
-                body: `ליד חדש מדף הנחיתה:\nשם: ${name}\nטלפון: ${phone}\nאימייל: ${email || "לא צוין"}`,
-              },
-            }),
-          }
-        );
+        const message = [
+          "ליד חדש מדף הנחיתה!",
+          "",
+          `שם: ${name}`,
+          `טלפון: ${phone}`,
+          `אימייל: ${email || "לא צוין"}`,
+          "",
+          `זמן: ${new Date().toLocaleString("he-IL", { timeZone: "Asia/Jerusalem" })}`,
+        ].join("\n");
+
+        await fetch(`${wahaUrl}/api/sendText`, {
+          method: "POST",
+          headers: {
+            "X-Api-Key": wahaKey,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            session: wahaSession,
+            chatId: notifyChatId,
+            text: message,
+          }),
+        });
       } catch (err) {
         // Don't fail the lead submission if notification fails
-        console.error("WhatsApp notification failed:", err);
+        console.error("WAHA notification failed:", err);
       }
     }
 
