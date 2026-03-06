@@ -250,7 +250,7 @@ export default function YoramLandingPage() {
 
       {/* ── STEPS SECTION ── */}
       <section id="steps" ref={stepsSection.ref}
-        className={`py-20 bg-white transition-all duration-700 ${stepsSection.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        className="py-20 bg-white" style={{ opacity: stepsSection.isVisible ? 1 : 0, transform: stepsSection.isVisible ? 'none' : 'translateY(32px)', transition: 'all 0.7s ease-out' }}>
         <div className="max-w-5xl mx-auto px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-[#1a2a5e] mb-4" style={{ fontFamily: "Georgia, serif" }}>
             {"\u05D0\u05D9\u05DA \u05D6\u05D4 \u05E2\u05D5\u05D1\u05D3?"}
@@ -275,7 +275,7 @@ export default function YoramLandingPage() {
 
       {/* ── WHY US (DIFFERENTIATORS) ── */}
       <section id="why" ref={diffSection.ref}
-        className={`py-20 bg-gray-50 transition-all duration-700 ${diffSection.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        className="py-20 bg-gray-50" style={{ opacity: diffSection.isVisible ? 1 : 0, transform: diffSection.isVisible ? 'none' : 'translateY(32px)', transition: 'all 0.7s ease-out' }}>
         <div className="max-w-5xl mx-auto px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-[#1a2a5e] mb-4" style={{ fontFamily: "Georgia, serif" }}>
             {"\u05DC\u05DE\u05D4 \u05D3\u05E8\u05DB\u05E0\u05D5?"}
@@ -301,7 +301,7 @@ export default function YoramLandingPage() {
 
       {/* ── STATS SECTION ── */}
       <section ref={statsSection.ref}
-        className={`py-16 bg-gradient-to-r from-[#1a2a5e] to-[#2b6cb0] transition-all duration-700 ${statsSection.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        className="py-16 bg-gradient-to-r from-[#1a2a5e] to-[#2b6cb0]" style={{ opacity: statsSection.isVisible ? 1 : 0, transform: statsSection.isVisible ? 'none' : 'translateY(32px)', transition: 'all 0.7s ease-out' }}>
         <div className="max-w-4xl mx-auto px-6 grid grid-cols-3 gap-8 text-center text-white">
           {YORAM_CONFIG.stats.map((stat, i) => (
             <div key={i}>
@@ -316,7 +316,7 @@ export default function YoramLandingPage() {
 
       {/* ── CREDENTIALS SECTION ── */}
       <section id="credentials" ref={credSection.ref}
-        className={`py-20 bg-white transition-all duration-700 ${credSection.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        className="py-20 bg-white" style={{ opacity: credSection.isVisible ? 1 : 0, transform: credSection.isVisible ? 'none' : 'translateY(32px)', transition: 'all 0.7s ease-out' }}>
         <div className="max-w-5xl mx-auto px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-[#1a2a5e] mb-14" style={{ fontFamily: "Georgia, serif" }}>
             {"\u05E0\u05D9\u05E1\u05D9\u05D5\u05DF \u05D5\u05D0\u05DE\u05D9\u05E0\u05D5\u05EA"}
