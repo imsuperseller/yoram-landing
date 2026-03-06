@@ -1,8 +1,8 @@
 "use client";
-
 import * as React from "react";
 import { YORAM_CONFIG } from "../lib/content";
 
+/* ── Scroll-reveal hook ── */
 function useScrollReveal<T extends HTMLElement>(threshold = 0.15) {
   const ref = React.useRef<T>(null);
   const [isVisible, setIsVisible] = React.useState(false);
@@ -19,6 +19,7 @@ function useScrollReveal<T extends HTMLElement>(threshold = 0.15) {
   return { ref, isVisible };
 }
 
+/* ── Animated counter hook ── */
 function useAnimatedCounter(end: number, duration: number, start: boolean) {
   const [val, setVal] = React.useState(0);
   React.useEffect(() => {
@@ -36,26 +37,43 @@ function useAnimatedCounter(end: number, duration: number, start: boolean) {
   return val;
 }
 
-const ShieldIcon = () => (
-  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-  </svg>
-);
-const ChartIcon = () => (
-  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
-  </svg>
-);
-const HeartIcon = () => (
-  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-  </svg>
-);
-const PhoneIcon = () => (
-  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-  </svg>
-);
+/* ── SVG Icons ── */
+function ShieldIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-7 h-7">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    </svg>
+  );
+}
+function ChartIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-7 h-7">
+      <path d="M18 20V10M12 20V4M6 20v-6" strokeLinecap="round" />
+    </svg>
+  );
+}
+function HeartIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-7 h-7">
+      <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z" />
+    </svg>
+  );
+}
+function PhoneIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-7 h-7">
+      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+    </svg>
+  );
+}
+function CheckCircleIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 text-emerald-500 flex-shrink-0">
+      <path d="M22 11.08V12a10 10 0 11-5.93-9.14" strokeLinecap="round" />
+      <path d="M22 4L12 14.01l-3-3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
 const DIFF_ICONS: Record<string, React.ReactNode> = {
   shield: <ShieldIcon />,
@@ -63,299 +81,337 @@ const DIFF_ICONS: Record<string, React.ReactNode> = {
   heart: <HeartIcon />,
 };
 
-function CredentialCard({ cred, isVisible, delay }: { cred: { title: string; value: string; icon: string }; isVisible: boolean; delay: number }) {
+/* ── WhatsApp FAB ── */
+function WhatsAppFAB() {
+  const [expanded, setExpanded] = React.useState(false);
+  const waUrl = `https://wa.me/${YORAM_CONFIG.whatsapp}?text=${encodeURIComponent("\u05D4\u05D9\u05D9, \u05D0\u05E9\u05DE\u05D7 \u05DC\u05E7\u05D1\u05DC \u05D1\u05D3\u05D9\u05E7\u05EA \u05EA\u05D9\u05E7 \u05D1\u05D9\u05D8\u05D5\u05D7 \u05D7\u05D9\u05E0\u05DD")}`;
   return (
-    <div
-      className="bg-white/10 backdrop-blur rounded-xl p-6 text-center transition-all duration-700 ease-out"
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0) scale(1)" : "translateY(30px) scale(0.95)",
-        transitionDelay: delay + "ms",
-      }}
-    >
-      <div className="text-3xl mb-2">{cred.icon}</div>
-      <div className="text-2xl font-bold text-white mb-1">{cred.value}</div>
-      <div className="text-blue-200 text-sm">{cred.title}</div>
+    <div className="fixed bottom-6 left-6 z-50 flex items-end gap-3" dir="ltr">
+      {expanded && (
+        <a href={waUrl} target="_blank" rel="noopener noreferrer"
+          className="bg-white text-gray-800 px-5 py-3 rounded-2xl shadow-xl text-sm font-medium
+                     animate-[fadeIn_0.2s_ease-out] hover:bg-gray-50 transition-colors whitespace-nowrap">
+          {"\u05E9\u05DC\u05D7\u05D5 \u05D4\u05D5\u05D3\u05E2\u05D4 \u05D1\u05D5\u05D5\u05D0\u05D8\u05E1\u05D0\u05E4 \u2709\uFE0F"}
+        </a>
+      )}
+      <button onClick={() => setExpanded(!expanded)}
+        className="w-14 h-14 rounded-full bg-[#25D366] text-white shadow-lg
+                   hover:scale-110 transition-transform flex items-center justify-center">
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.3 0-4.438-.744-6.166-2.008l-.43-.322-2.65.888.888-2.65-.322-.43A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+        </svg>
+      </button>
     </div>
   );
 }
 
-function WhatsAppFAB({ phone, text }: { phone: string; text: string }) {
-  const [hovered, setHovered] = React.useState(false);
-  const waLink = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
-  return (
-    <a
-      href={waLink}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 flex h-14 items-center overflow-hidden rounded-full shadow-2xl font-semibold text-sm text-white bg-green-500 hover:bg-green-600 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
-      style={{ width: hovered ? "220px" : "56px" }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      aria-label={text}
-    >
-      <div className="flex h-14 w-14 shrink-0 items-center justify-center">
-        <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.025.507 3.932 1.395 5.608L.054 23.395a.75.75 0 00.92.92l5.787-1.341A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.875 0-3.632-.5-5.147-1.373l-.37-.22-3.834.889.889-3.834-.22-.37A9.712 9.712 0 012.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75z" />
-        </svg>
-      </div>
-      <span
-        className="whitespace-nowrap pr-4 transition-opacity duration-200"
-        style={{ opacity: hovered ? 1 : 0 }}
-      >
-        {text}
-      </span>
-    </a>
-  );
-}
-
+/* ══════════════════════════════════════════════
+   MAIN PAGE COMPONENT
+   ══════════════════════════════════════════════ */
 export default function YoramLandingPage() {
-  const c = YORAM_CONFIG;
-  const [mounted, setMounted] = React.useState(false);
-  const [formState, setFormState] = React.useState<"idle" | "sending" | "sent">("idle");
-  const [formData, setFormData] = React.useState({ name: "", phone: "", email: "" });
+  const [formData, setFormData] = React.useState({ name: "", phone: "" });
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
 
-  const stepsReveal = useScrollReveal<HTMLDivElement>();
-  const diffReveal = useScrollReveal<HTMLDivElement>();
-  const statsReveal = useScrollReveal<HTMLDivElement>();
-  const credReveal = useScrollReveal<HTMLDivElement>();
-  const ctaReveal = useScrollReveal<HTMLDivElement>();
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-  const stat1 = useAnimatedCounter(c.stats[0]?.value ?? 0, 2000, statsReveal.isVisible);
-  const stat2 = useAnimatedCounter(c.stats[1]?.value ?? 0, 2000, statsReveal.isVisible);
-  const stat3 = useAnimatedCounter(c.stats[2]?.value ?? 0, 2000, statsReveal.isVisible);
-  const statVals = [stat1, stat2, stat3];
-
-  React.useEffect(() => { setMounted(true); }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setFormState("sending");
-    const waText = `${c.heroHeadline}\n${formData.name}\n${formData.phone}${formData.email ? "\n" + formData.email : ""}`;
-    window.open(`https://wa.me/${c.whatsapp}?text=${encodeURIComponent(waText)}`, "_blank");
-    setTimeout(() => setFormState("sent"), 1000);
+    const msg = `\u05E9\u05DC\u05D5\u05DD, \u05E7\u05D5\u05E8\u05D0\u05D9\u05DD \u05DC\u05D9 ${formData.name}. \u05D0\u05E9\u05DE\u05D7 \u05DC\u05D1\u05D3\u05D9\u05E7\u05EA \u05EA\u05D9\u05E7 \u05D1\u05D9\u05D8\u05D5\u05D7 \u05D7\u05D9\u05E0\u05DD. \u05D8\u05DC\u05E4\u05D5\u05DF: ${formData.phone}`;
+    window.open(`https://wa.me/${YORAM_CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
+  /* Scroll-reveal refs */
+  const stepsSection = useScrollReveal<HTMLElement>(0.1);
+  const diffSection = useScrollReveal<HTMLElement>(0.1);
+  const statsSection = useScrollReveal<HTMLElement>(0.15);
+  const credSection = useScrollReveal<HTMLElement>(0.1);
+  const ctaSection = useScrollReveal<HTMLElement>(0.15);
+
+  const stat0 = useAnimatedCounter(YORAM_CONFIG.stats[0].value, 1800, statsSection.isVisible);
+  const stat1 = useAnimatedCounter(YORAM_CONFIG.stats[1].value, 2200, statsSection.isVisible);
+  const stat2 = useAnimatedCounter(YORAM_CONFIG.stats[2].value, 1400, statsSection.isVisible);
+  const statVals = [stat0, stat1, stat2];
+
   return (
-    <div dir="rtl" className="min-h-screen bg-gradient-to-b from-[#1a2a5e] via-[#1e3470] to-[#2b6cb0] font-sans overflow-x-hidden">
-      {/* Hero */}
-      <section className="relative min-h-[90vh] flex items-center justify-center px-4 py-16">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 right-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 left-10 w-96 h-96 bg-orange-400/5 rounded-full blur-3xl" />
-        </div>
-        <div className="relative z-10 max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div className="text-center md:text-right space-y-6">
-            <h1
-              className="text-4xl md:text-6xl font-black text-white leading-tight transition-all duration-700 ease-out"
-              style={{
-                opacity: mounted ? 1 : 0,
-                transform: mounted ? "translateY(0)" : "translateY(30px)",
-                transitionDelay: "0ms",
-              }}
-            >
-              {c.heroHeadline}
-            </h1>
-            <p
-              className="text-xl md:text-2xl text-blue-100 font-light transition-all duration-700 ease-out"
-              style={{
-                opacity: mounted ? 1 : 0,
-                transform: mounted ? "translateY(0)" : "translateY(30px)",
-                transitionDelay: "150ms",
-              }}
-            >
-              {c.heroSubheadline}
-            </p>
-            <p
-              className="text-blue-200/80 text-lg transition-all duration-700 ease-out"
-              style={{
-                opacity: mounted ? 1 : 0,
-                transform: mounted ? "translateY(0)" : "translateY(30px)",
-                transitionDelay: "300ms",
-              }}
-            >
-              {c.tagline}
-            </p>
-            <div
-              className="flex gap-4 justify-center md:justify-end transition-all duration-700 ease-out"
-              style={{
-                opacity: mounted ? 1 : 0,
-                transform: mounted ? "translateY(0)" : "translateY(30px)",
-                transitionDelay: "450ms",
-              }}
-            >
-              <a href={`tel:${c.phone}`} className="flex items-center gap-2 bg-white/10 backdrop-blur px-5 py-3 rounded-full text-white hover:bg-white/20 transition-colors">
+    <div className="min-h-screen bg-white text-gray-900" dir="rtl">
+
+      {/* ── NAVBAR ── */}
+      <nav className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${
+        scrolled ? "bg-[#1a2a5e]/95 backdrop-blur-md shadow-lg" : "bg-transparent"
+      }`}>
+        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
+              <span className="text-[#1a2a5e] font-bold text-lg" style={{ fontFamily: "Georgia, serif" }}>YF</span>
+            </div>
+            <span className="text-white font-semibold text-sm hidden sm:block">
+              {"\u05D9\u05D5\u05E8\u05DD \u05E4\u05E8\u05D9\u05D3\u05DE\u05DF \u05D1\u05D9\u05D8\u05D5\u05D7"}
+            </span>
+          </div>
+          <div className="hidden md:flex items-center gap-8 text-white/90 text-sm font-medium">
+            <a href="#steps" className="hover:text-white transition-colors">{"\u05D0\u05D9\u05DA \u05D6\u05D4 \u05E2\u05D5\u05D1\u05D3?"}</a>
+            <a href="#why" className="hover:text-white transition-colors">{"\u05DC\u05DE\u05D4 \u05D3\u05E8\u05DB\u05E0\u05D5?"}</a>
+            <a href="#credentials" className="hover:text-white transition-colors">{"\u05E0\u05D9\u05E1\u05D9\u05D5\u05DF"}</a>
+            <a href={`tel:${YORAM_CONFIG.phone}`} className="bg-[#f97316] text-white px-4 py-2 rounded-lg hover:bg-[#ea580c] transition-colors">
+              <span className="flex items-center gap-2">
                 <PhoneIcon />
-                <span>{c.phone}</span>
-              </a>
+                {YORAM_CONFIG.phone}
+              </span>
+            </a>
+          </div>
+          <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-white p-2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6">
+              {menuOpen
+                ? <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
+                : <path d="M3 12h18M3 6h18M3 18h18" strokeLinecap="round" />}
+            </svg>
+          </button>
+        </div>
+        {menuOpen && (
+          <div className="md:hidden bg-[#1a2a5e]/95 backdrop-blur-md border-t border-white/10 px-6 py-4 space-y-3">
+            <a href="#steps" onClick={() => setMenuOpen(false)} className="block text-white/90 hover:text-white py-2">{"\u05D0\u05D9\u05DA \u05D6\u05D4 \u05E2\u05D5\u05D1\u05D3?"}</a>
+            <a href="#why" onClick={() => setMenuOpen(false)} className="block text-white/90 hover:text-white py-2">{"\u05DC\u05DE\u05D4 \u05D3\u05E8\u05DB\u05E0\u05D5?"}</a>
+            <a href="#credentials" onClick={() => setMenuOpen(false)} className="block text-white/90 hover:text-white py-2">{"\u05E0\u05D9\u05E1\u05D9\u05D5\u05DF"}</a>
+            <a href={`tel:${YORAM_CONFIG.phone}`} className="block bg-[#f97316] text-white text-center px-4 py-2 rounded-lg">
+              {YORAM_CONFIG.phone}
+            </a>
+          </div>
+        )}
+      </nav>
+
+      {/* ── HERO ── */}
+      <section className="relative min-h-[92vh] flex items-center bg-gradient-to-br from-[#1a2a5e] via-[#1e3470] to-[#2b6cb0] pt-16 overflow-hidden">
+        {/* Subtle pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.04]" style={{
+          backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+          backgroundSize: "40px 40px"
+        }} />
+
+        <div className="relative max-w-6xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center py-12">
+          {/* Right side - Text (RTL) */}
+          <div className="text-white space-y-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight" style={{ fontFamily: "Georgia, serif" }}>
+              {"\u05DE\u05E9\u05DC\u05DE\u05D9\u05DD \u05D9\u05D5\u05EA\u05E8 \u05DE\u05D3\u05D9?"}
+              <br />
+              <span className="text-[#f97316]">{"\u05D6\u05D4 \u05D4\u05D6\u05DE\u05DF \u05DC\u05D1\u05D3\u05D5\u05E7."}</span>
+            </h1>
+            <p className="text-lg sm:text-xl text-white/80 max-w-lg leading-relaxed">
+              {YORAM_CONFIG.heroSubheadline}
+            </p>
+            <div className="flex flex-wrap gap-4 text-sm text-white/70">
+              <span className="flex items-center gap-2"><CheckCircleIcon /> {"\u05DC\u05DC\u05D0 \u05E2\u05DC\u05D5\u05EA"}</span>
+              <span className="flex items-center gap-2"><CheckCircleIcon /> {"\u05DC\u05DC\u05D0 \u05D4\u05EA\u05D7\u05D9\u05D9\u05D1\u05D5\u05EA"}</span>
+              <span className="flex items-center gap-2"><CheckCircleIcon /> {"25+ \u05E9\u05E0\u05D5\u05EA \u05E0\u05D9\u05E1\u05D9\u05D5\u05DF"}</span>
             </div>
           </div>
 
-          {/* Form Card */}
-          <div
-            className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/20 transition-all duration-700 ease-out"
-            style={{
-              opacity: mounted ? 1 : 0,
-              transform: mounted ? "translateY(0) scale(1)" : "translateY(30px) scale(0.95)",
-              transitionDelay: "300ms",
-            }}
-          >
-            {formState === "sent" ? (
-              <div className="text-center py-8">
-                <div className="text-5xl mb-4 animate-bounce-in">{"✅"}</div>
-                <p className="text-white text-xl font-bold">{"תודה!"}</p>
-                <p className="text-blue-200 mt-2">{"נחזור אליך בהקדם"}</p>
+          {/* Left side - Form card */}
+          <div className="bg-white rounded-2xl shadow-2xl p-8 text-gray-900">
+            <h2 className="text-2xl font-bold mb-2 text-[#1a2a5e]" style={{ fontFamily: "Georgia, serif" }}>
+              {"\u05D1\u05D3\u05D9\u05E7\u05EA \u05EA\u05D9\u05E7 \u05D7\u05D9\u05E0\u05DD"}
+            </h2>
+            <p className="text-gray-500 text-sm mb-6">{"\u05DE\u05DC\u05D0\u05D5 \u05E4\u05E8\u05D8\u05D9\u05DD \u05D5\u05E0\u05D7\u05D6\u05D5\u05E8 \u05D0\u05DC\u05D9\u05DB\u05DD \u05EA\u05D5\u05DA 24 \u05E9\u05E2\u05D5\u05EA"}</p>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{"\u05E9\u05DD \u05DE\u05DC\u05D0"}</label>
+                <input type="text" required placeholder={"\u05D9\u05D5\u05E8\u05DD \u05D9\u05E9\u05E8\u05D0\u05DC\u05D9"}
+                  value={formData.name} onChange={e => setFormData(p => ({ ...p, name: e.target.value }))}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-[#2b6cb0] focus:border-transparent outline-none transition-all text-gray-900" />
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <p className="text-white text-lg font-bold text-center mb-2">{"השאירו פרטים לבדיקה חינם"}</p>
-                <input
-                  type="text"
-                  required
-                  placeholder={"שם מלא"}
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-blue-200/60 border border-white/30 focus:border-orange-400 focus:ring-2 focus:ring-orange-400/50 outline-none transition"
-                />
-                <input
-                  type="tel"
-                  required
-                  placeholder={"טלפון"}
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-blue-200/60 border border-white/30 focus:border-orange-400 focus:ring-2 focus:ring-orange-400/50 outline-none transition"
-                />
-                <input
-                  type="email"
-                  placeholder={"אימייל (רשות)"}
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-blue-200/60 border border-white/30 focus:border-orange-400 focus:ring-2 focus:ring-orange-400/50 outline-none transition"
-                />
-                <button
-                  type="submit"
-                  disabled={formState === "sending"}
-                  className="w-full py-4 bg-gradient-to-l from-orange-500 to-orange-600 text-white font-bold rounded-lg text-lg hover:from-orange-600 hover:to-orange-700 transform hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg disabled:opacity-50"
-                >
-                  {formState === "sending" ? "…" : c.ctaText}
-                </button>
-              </form>
-            )}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{"\u05D8\u05DC\u05E4\u05D5\u05DF"}</label>
+                <input type="tel" required placeholder="050-000-0000" dir="ltr"
+                  value={formData.phone} onChange={e => setFormData(p => ({ ...p, phone: e.target.value }))}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-[#2b6cb0] focus:border-transparent outline-none transition-all text-gray-900" />
+              </div>
+              <button type="submit"
+                className="w-full py-4 rounded-xl bg-[#f97316] hover:bg-[#ea580c] text-white font-bold text-lg
+                           shadow-lg shadow-orange-500/25 transition-all hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98]">
+                {YORAM_CONFIG.ctaText}
+              </button>
+            </form>
+            <p className="text-center text-xs text-gray-400 mt-4">{"\u05DC\u05D0 \u05E1\u05E4\u05DD \u2022 \u05D0\u05D5\u05D1\u05D9\u05D9\u05E7\u05D8\u05D9\u05D1\u05D9\u05D5\u05EA \u05DE\u05DC\u05D0\u05D4"}</p>
           </div>
+        </div>
+
+        {/* Wave divider */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 120" fill="none" className="w-full">
+            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H0Z" fill="white"/>
+          </svg>
         </div>
       </section>
 
-      {/* Steps */}
-      <section ref={stepsReveal.ref} className="py-20 px-4">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black text-white text-center mb-16">{"איך זה עובד?"}</h2>
-          <div className="space-y-8">
-            {c.steps.map((step, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-6 transition-all duration-700 ease-out"
-                style={{
-                  opacity: stepsReveal.isVisible ? 1 : 0,
-                  transform: stepsReveal.isVisible ? "translateX(0)" : "translateX(40px)",
-                  transitionDelay: (i * 150) + "ms",
-                }}
-              >
-                <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl flex items-center justify-center text-white text-xl font-black shadow-lg">
-                  {step.number}
+      {/* ── STEPS SECTION ── */}
+      <section id="steps" ref={stepsSection.ref}
+        className={`py-20 bg-white transition-all duration-700 ${stepsSection.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center text-[#1a2a5e] mb-4" style={{ fontFamily: "Georgia, serif" }}>
+            {"\u05D0\u05D9\u05DA \u05D6\u05D4 \u05E2\u05D5\u05D1\u05D3?"}
+          </h2>
+          <p className="text-center text-gray-500 mb-14 max-w-xl mx-auto">
+            {"\u05EA\u05D4\u05DC\u05D9\u05DA \u05E4\u05E9\u05D5\u05D8 \u05D1-5 \u05E6\u05E2\u05D3\u05D9\u05DD \u2013 \u05D0\u05E0\u05D7\u05E0\u05D5 \u05E2\u05D5\u05E9\u05D9\u05DD \u05D0\u05EA \u05D4\u05E2\u05D1\u05D5\u05D3\u05D4"}
+          </p>
+          <div className="grid sm:grid-cols-5 gap-6">
+            {YORAM_CONFIG.steps.map((step, i) => (
+              <div key={i} className="text-center group" style={{ transitionDelay: `${i * 100}ms` }}>
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#1a2a5e] to-[#2b6cb0] text-white flex items-center justify-center mx-auto mb-4
+                               text-xl font-bold shadow-lg group-hover:scale-110 transition-transform">
+                  {i + 1}
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-1">{step.title}</h3>
-                  <p className="text-blue-200/80">{step.description}</p>
-                </div>
+                <h3 className="font-bold text-gray-900 mb-1 text-sm">{step.title}</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">{step.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Differentiators */}
-      <section ref={diffReveal.ref} className="py-20 px-4 bg-white/5">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black text-white text-center mb-16">{"למה דרכנו?"}</h2>
+      {/* ── WHY US (DIFFERENTIATORS) ── */}
+      <section id="why" ref={diffSection.ref}
+        className={`py-20 bg-gray-50 transition-all duration-700 ${diffSection.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center text-[#1a2a5e] mb-4" style={{ fontFamily: "Georgia, serif" }}>
+            {"\u05DC\u05DE\u05D4 \u05D3\u05E8\u05DB\u05E0\u05D5?"}
+          </h2>
+          <p className="text-center text-gray-500 mb-14 max-w-xl mx-auto">
+            {"\u05D9\u05D5\u05E8\u05DD \u05E4\u05E8\u05D9\u05D3\u05DE\u05DF \u2013 \u05E1\u05D5\u05DB\u05DF \u05D1\u05D9\u05D8\u05D5\u05D7 \u05DE\u05D5\u05E8\u05E9\u05D4 \u05E2\u05DD 25+ \u05E9\u05E0\u05D5\u05EA \u05E0\u05D9\u05E1\u05D9\u05D5\u05DF"}
+          </p>
           <div className="grid md:grid-cols-3 gap-8">
-            {c.differentiators.map((diff, i) => (
-              <div
-                key={i}
-                className="bg-white/10 backdrop-blur rounded-2xl p-8 text-center border border-white/10 hover:border-orange-400/30 transition-all duration-700 ease-out hover:transform hover:scale-105"
-                style={{
-                  opacity: diffReveal.isVisible ? 1 : 0,
-                  transform: diffReveal.isVisible ? "translateY(0) scale(1)" : "translateY(40px) scale(0.9)",
-                  transitionDelay: (i * 200) + "ms",
-                }}
-              >
-                <div className="text-orange-400 mb-4 flex justify-center">
+            {YORAM_CONFIG.differentiators.map((diff, i) => (
+              <div key={i}
+                className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md hover:border-[#2b6cb0]/30 transition-all group"
+                style={{ transitionDelay: `${i * 150}ms` }}>
+                <div className="w-14 h-14 rounded-xl bg-[#1a2a5e]/10 text-[#1a2a5e] flex items-center justify-center mb-5 group-hover:bg-[#1a2a5e] group-hover:text-white transition-colors">
                   {DIFF_ICONS[diff.icon] || <ShieldIcon />}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{diff.title}</h3>
-                <p className="text-blue-200/80 text-sm leading-relaxed">{diff.description}</p>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{diff.title}</h3>
+                <p className="text-gray-500 leading-relaxed">{diff.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section ref={statsReveal.ref} className="py-20 px-4">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black text-white text-center mb-16">{"המספרים מדברים"}</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {c.stats.map((stat, i) => (
-              <div key={i} className="text-center">
-                <div className="text-5xl md:text-6xl font-black text-orange-400 mb-2">
-                  {statVals[i]}{stat.suffix}
-                </div>
-                <div className="text-blue-200 text-lg">{stat.label}</div>
+      {/* ── STATS SECTION ── */}
+      <section ref={statsSection.ref}
+        className={`py-16 bg-gradient-to-r from-[#1a2a5e] to-[#2b6cb0] transition-all duration-700 ${statsSection.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        <div className="max-w-4xl mx-auto px-6 grid grid-cols-3 gap-8 text-center text-white">
+          {YORAM_CONFIG.stats.map((stat, i) => (
+            <div key={i}>
+              <div className="text-4xl sm:text-5xl font-bold mb-2" style={{ fontFamily: "Georgia, serif" }}>
+                {statVals[i]}{stat.suffix}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Credentials */}
-      <section ref={credReveal.ref} className="py-20 px-4 bg-white/5">
-        <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
-          {c.credentials.map((cred, i) => (
-            <CredentialCard key={i} cred={cred} isVisible={credReveal.isVisible} delay={i * 150} />
+              <div className="text-white/70 text-sm">{stat.label}</div>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* CTA */}
-      <section ref={ctaReveal.ref} className="py-20 px-4">
-        <div
-          className="max-w-3xl mx-auto text-center transition-all duration-700 ease-out"
-          style={{
-            opacity: ctaReveal.isVisible ? 1 : 0,
-            transform: ctaReveal.isVisible ? "translateY(0)" : "translateY(30px)",
-          }}
-        >
-          <h2 className="text-3xl md:text-4xl font-black text-white mb-6">{"רוצים לבדוק אם אתם משלמים יותר מדי?"}</h2>
-          <a
-            href={`https://wa.me/${c.whatsapp}?text=${encodeURIComponent(c.heroHeadline)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block py-4 px-10 bg-gradient-to-l from-orange-500 to-orange-600 text-white font-bold rounded-full text-lg hover:from-orange-600 hover:to-orange-700 transform hover:scale-105 active:scale-95 transition-all shadow-xl"
-          >
-            {c.ctaText}
-          </a>
+      {/* ── CREDENTIALS SECTION ── */}
+      <section id="credentials" ref={credSection.ref}
+        className={`py-20 bg-white transition-all duration-700 ${credSection.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center text-[#1a2a5e] mb-14" style={{ fontFamily: "Georgia, serif" }}>
+            {"\u05E0\u05D9\u05E1\u05D9\u05D5\u05DF \u05D5\u05D0\u05DE\u05D9\u05E0\u05D5\u05EA"}
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {YORAM_CONFIG.credentials.map((cred, i) => (
+              <div key={i}
+                className="bg-gray-50 rounded-2xl p-6 text-center border border-gray-100 hover:border-[#2b6cb0]/30 hover:shadow-md transition-all"
+                style={{ transitionDelay: `${i * 100}ms` }}>
+                <div className="text-4xl mb-4">{cred.icon}</div>
+                <h3 className="font-bold text-gray-900 mb-1">{cred.title}</h3>
+                <p className="text-sm text-gray-500">{cred.value}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 px-4 border-t border-white/10">
-        <div className="max-w-5xl mx-auto text-center space-y-2">
-          <p className="text-blue-200/60 text-sm">{c.complianceFooter}</p>
-          <p className="text-blue-200/40 text-xs">{c.companyName} | {c.phone}</p>
+
+      {/* ── CTA Section ── */}
+      <section className="relative py-24 overflow-hidden" style={{ background: 'linear-gradient(135deg, #1a2a5e 0%, #2b4a8e 50%, #1a2a5e 100%)' }}>
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+        <div className="relative max-w-3xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4" style={{ fontFamily: 'Georgia, serif' }}>
+            {"הגיע הזמן לבדוק את התיק שלך"}
+          </h2>
+          <p className="text-xl text-blue-200 mb-8">
+            {"בדיקה חינם ללא התחייבות — תוך 5 דקות תדעו אם אתם משלמים יותר מדי"}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href={`https://wa.me/${YORAM_CONFIG.whatsapp}?text=${encodeURIComponent('היי, אשמח לבדיקת תיק ביטוח חינם')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              style={{ background: '#25D366' }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.67-1.228A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.143 0-4.142-.612-5.848-1.678a.5.5 0 00-.398-.052l-3.4.895.737-3.088a.5.5 0 00-.07-.422A9.935 9.935 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+              {"שלחו הודעה בוואטסאפ"}
+            </a>
+            <a
+              href={`tel:${YORAM_CONFIG.phone}`}
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-lg font-bold text-white border-2 border-white/30 transition-all duration-300 hover:bg-white/10 hover:border-white/60"
+            >
+              <PhoneIcon />
+              {YORAM_CONFIG.phone}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Footer ── */}
+      <footer className="bg-gray-900 text-gray-400 py-12">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" style={{ background: 'linear-gradient(135deg, #1a2a5e, #2b6cb0)' }}>YF</div>
+                <span className="text-white font-semibold">{YORAM_CONFIG.businessName}</span>
+              </div>
+              <p className="text-sm leading-relaxed">
+                {"סוכן ביטוח מורשה עם ניסיון של מעל ל-25 שנה. מתמחה במציאת הפתרונות הטובות ביותר עבור כל לקוח."}
+              </p>
+            </div>
+            <div>
+              <h4 className="text-white font-semibold mb-4">{"תחומי התמחות"}</h4>
+              <ul className="space-y-2 text-sm">
+                <li>{"ביטוח חיים ומשכנתא"}</li>
+                <li>{"פנסיה וגמל"}</li>
+                <li>{"חיסכונות והשקעות"}</li>
+                <li>{"ביטוח עסקי ורכב"}</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-white font-semibold mb-4">{"צור קשר"}</h4>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-center gap-2">
+                  <PhoneIcon />
+                  <a href={`tel:${YORAM_CONFIG.phone}`} className="hover:text-white transition-colors">{YORAM_CONFIG.phone}</a>
+                </li>
+                <li className="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <span>yoram@friedmanbit.co.il</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 pt-6 text-center text-xs">
+            <p>{YORAM_CONFIG.complianceFooter}</p>
+            <p className="mt-2 text-gray-600">{"© "}{new Date().getFullYear()}{" "}{YORAM_CONFIG.businessName}{". כל הזכויות שמורות."}</p>
+          </div>
         </div>
       </footer>
 
-      <WhatsAppFAB phone={c.whatsapp} text={"דברו איתנו בוואטסאפ"} />
+      <WhatsAppFAB />
     </div>
   );
 }
