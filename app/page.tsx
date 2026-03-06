@@ -148,9 +148,9 @@ export default function YoramLandingPage() {
   const statsRef = useScrollReveal<HTMLElement>();
   const credRef = useScrollReveal<HTMLElement>();
 
-  const stat0 = useAnimatedCounter(parseInt(YORAM_CONFIG.stats[0].value), statsRef.isVisible);
-  const stat1 = useAnimatedCounter(parseInt(YORAM_CONFIG.stats[1].value.replace(/[+,]/g, "")), statsRef.isVisible);
-  const stat2 = useAnimatedCounter(parseInt(YORAM_CONFIG.stats[2].value.replace(/[+]/g, "")), statsRef.isVisible);
+  const stat0 = useAnimatedCounter(YORAM_CONFIG.stats[0].value, statsRef.isVisible);
+  const stat1 = useAnimatedCounter(YORAM_CONFIG.stats[1].value, statsRef.isVisible);
+  const stat2 = useAnimatedCounter(YORAM_CONFIG.stats[2].value, statsRef.isVisible);
   const statValues = [stat0, stat1, stat2];
 
   const navItems = [
@@ -259,7 +259,7 @@ export default function YoramLandingPage() {
         </div>
       </section>
       {/* ── Steps ── */}
-      <section id="steps" ref={stepsRef.ref} style={{ padding:"100px 24px", maxWidth:"1200px", margin:"0 auto", opacity: statsRef.isVisible ? 1 : 0, transform: statsRef.isVisible ? "translateY(0)" : "translateY(30px)", transition:"opacity 0.8s ease-out, transform 0.8s ease-out" }}>
+      <section id="steps" ref={stepsRef.ref} style={{ padding:"100px 24px", maxWidth:"1200px", margin:"0 auto", opacity: stepsRef.isVisible ? 1 : 0, transform: stepsRef.isVisible ? "translateY(0)" : "translateY(30px)", transition:"opacity 0.8s ease-out, transform 0.8s ease-out" }}>
         <h2 style={{ textAlign:"center", fontSize:"2rem", fontWeight:700, color:"#1a2a5e", marginBottom:"60px" }}>איך זה עובד?</h2>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(180px, 1fr))", gap:"32px" }}>
           {YORAM_CONFIG.steps.map((s, i) => (
@@ -273,7 +273,7 @@ export default function YoramLandingPage() {
       </section>
 
       {/* ── Differentiators ── */}
-      <section id="why" ref={diffRef.ref} style={{ padding:"80px 24px", background:"white", opacity: diffRef.inView ? 1 : 0, transform: diffRef.inView ? "translateY(0)" : "translateY(30px)", transition:"opacity 0.8s ease-out, transform 0.8s ease-out" }}>
+      <section id="why" ref={diffRef.ref} style={{ padding:"80px 24px", background:"white", opacity: diffRef.isVisible ? 1 : 0, transform: diffRef.isVisible ? "translateY(0)" : "translateY(30px)", transition:"opacity 0.8s ease-out, transform 0.8s ease-out" }}>
         <div style={{ maxWidth:"1200px", margin:"0 auto" }}>
           <h2 style={{ textAlign:"center", fontSize:"2rem", fontWeight:700, color:"#1a2a5e", marginBottom:"60px" }}>למה דרכנו?</h2>
           <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(280px, 1fr))", gap:"32px" }}>
@@ -293,7 +293,7 @@ export default function YoramLandingPage() {
         </div>
       </section>
       {/* ── Stats ── */}
-      <section ref={statsRef.ref} style={{ padding:"80px 24px", background:"linear-gradient(135deg,#1a2a5e,#2b6cb0)", opacity: statsRef.inView ? 1 : 0, transform: statsRef.inView ? "translateY(0)" : "translateY(30px)", transition:"opacity 0.8s ease-out, transform 0.8s ease-out" }}>
+      <section ref={statsRef.ref} style={{ padding:"80px 24px", background:"linear-gradient(135deg,#1a2a5e,#2b6cb0)", opacity: statsRef.isVisible ? 1 : 0, transform: statsRef.isVisible ? "translateY(0)" : "translateY(30px)", transition:"opacity 0.8s ease-out, transform 0.8s ease-out" }}>
         <div style={{ maxWidth:"900px", margin:"0 auto", display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(200px, 1fr))", gap:"32px", textAlign:"center" }}>
           {YORAM_CONFIG.stats.map((s, i) => (
             <div key={i}>
@@ -307,7 +307,7 @@ export default function YoramLandingPage() {
       </section>
 
       {/* ── Credentials ── */}
-      <section id="credentials" ref={credRef.ref} style={{ padding:"100px 24px", maxWidth:"1200px", margin:"0 auto", opacity: credRef.inView ? 1 : 0, transform: credRef.inView ? "translateY(0)" : "translateY(30px)", transition:"opacity 0.8s ease-out, transform 0.8s ease-out" }}>
+      <section id="credentials" ref={credRef.ref} style={{ padding:"100px 24px", maxWidth:"1200px", margin:"0 auto", opacity: credRef.isVisible ? 1 : 0, transform: credRef.isVisible ? "translateY(0)" : "translateY(30px)", transition:"opacity 0.8s ease-out, transform 0.8s ease-out" }}>
         <h2 style={{ textAlign:"center", fontSize:"2rem", fontWeight:700, color:"#1a2a5e", marginBottom:"60px" }}>ניסיון ואמינות</h2>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(240px, 1fr))", gap:"24px" }}>
           {YORAM_CONFIG.credentials.map((c, i) => (
